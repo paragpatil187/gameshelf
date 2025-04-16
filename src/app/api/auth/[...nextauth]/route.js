@@ -21,16 +21,6 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      profile(profile) {
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-          // Default role for new users
-          role: "user",
-        };
-      },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -82,33 +72,14 @@ export const authOptions = {
           ...token,
           userId: user.id,
           provider: account.provider,
-          role: user.role || "user",
         };
       }
-
-      // Check if user role has been updated in the database
-      if (token?.userId) {
-        try {
-          const { db } = await connectToDatabase();
-          const dbUser = await db.collection("users").findOne({
-            _id: new ObjectId(token.userId),
-          });
-
-          if (dbUser && dbUser.role) {
-            token.role = dbUser.role;
-          }
-        } catch (error) {
-          console.error("Error fetching user role:", error);
-        }
-      }
-
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.userId;
         session.user.provider = token.provider;
-        session.user.role = token.role || "user";
       }
       return session;
     },
