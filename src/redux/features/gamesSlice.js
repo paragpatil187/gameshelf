@@ -109,15 +109,26 @@ export const fetchGames = createAsyncThunk(
   "games/fetchGames",
   async (_, { rejectWithValue }) => {
     try {
-      // In a real app, this would be an API call
-      // For now, we'll just return mock data
+      const response = await fetch("/api/games"); // Replace with your backend API URL
+      const data = await response.json();
+       // Example: If backend returns { featuredGames: [...], popularGames: [...] }
+       if (
+        data &&
+        Array.isArray(data.featuredGames) &&
+        Array.isArray(data.popularGames) &&
+        (data.featuredGames.length > 0 || data.popularGames.length > 0)
+      ) {
+        return data;
+      }
       return {
         featuredGames: mockFeaturedGames,
         popularGames: mockPopularGames,
       };
     } catch (error) {
-      return rejectWithValue(error.message);
-    }
+      return {
+        featuredGames: mockFeaturedGames,
+        popularGames: mockPopularGames,
+      };    }
   },
 );
 
