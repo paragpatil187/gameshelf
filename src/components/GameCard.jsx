@@ -1,7 +1,7 @@
 import React from "react";
 
 function GameCard({ game, isFeatured = false }) {
-  const { id, title, genres, price, imageUrl } = game;
+  const { id, title, genres, price, imageUrl,screenshot } = game;
 
   return (
     <article

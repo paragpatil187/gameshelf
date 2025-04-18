@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Mock data for featured games
+// Fallback mock data
 const mockFeaturedGames = [
   {
     id: 1,
@@ -36,7 +36,6 @@ const mockFeaturedGames = [
   },
 ];
 
-// Mock data for popular games
 const mockPopularGames = [
   {
     id: 1,
@@ -104,56 +103,57 @@ const mockPopularGames = [
   },
 ];
 
-// Async thunk for fetching games
+// Fetch games from API and categorize them
 export const fetchGames = createAsyncThunk(
   "games/fetchGames",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("/api/games"); // Replace with your backend API URL
-      const data = await response.json();
-       // Example: If backend returns { featuredGames: [...], popularGames: [...] }
-       if (
-        data &&
-        Array.isArray(data.featuredGames) &&
-        Array.isArray(data.popularGames) &&
-        (data.featuredGames.length > 0 || data.popularGames.length > 0)
-      ) {
-        return data;
+      const response = await fetch("/api/games");
+      const games = await response.json();
+      console.log(games, "jkwedkjbew")
+
+      if (!Array.isArray(games)) {
+        throw new Error("Invalid game data format");
       }
+
+      const featuredGames = games.filter((game) => game.isFeatured);
+      const popularGames = games.filter((game) => game.isPopular);
+
+      return {
+        featuredGames: featuredGames.length > 0 ? featuredGames : mockFeaturedGames,
+        popularGames: popularGames.length > 0 ? popularGames : mockPopularGames,
+      };
+    } catch (error) {
+      console.error("Failed to fetch games:", error.message);
       return {
         featuredGames: mockFeaturedGames,
         popularGames: mockPopularGames,
       };
-    } catch (error) {
-      return {
-        featuredGames: mockFeaturedGames,
-        popularGames: mockPopularGames,
-      };    }
-  },
+    }
+  }
 );
 
-// Async thunk for searching games
+// Search games locally (from mock data)
 export const searchGames = createAsyncThunk(
   "games/searchGames",
   async (query, { rejectWithValue }) => {
     try {
-      // In a real app, this would be an API call
-      // For now, we'll just filter the mock data
       if (!query) {
         return mockPopularGames;
       }
 
       const filteredGames = mockPopularGames.filter((game) =>
-        game.title.toLowerCase().includes(query.toLowerCase()),
+        game.title.toLowerCase().includes(query.toLowerCase())
       );
 
       return filteredGames;
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  },
+  }
 );
 
+// Initial state
 const initialState = {
   featuredGames: [],
   popularGames: [],
@@ -163,6 +163,7 @@ const initialState = {
   error: null,
 };
 
+// Slice
 const gamesSlice = createSlice({
   name: "games",
   initialState,
@@ -173,7 +174,7 @@ const gamesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch Games
+      // fetchGames
       .addCase(fetchGames.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -187,7 +188,7 @@ const gamesSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      // Search Games
+      // searchGames
       .addCase(searchGames.pending, (state) => {
         state.isLoading = true;
         state.error = null;

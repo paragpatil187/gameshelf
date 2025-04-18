@@ -41,7 +41,7 @@ function GameCarousel({ games, onGameSelect }) {
             onClick={() => onGameSelect(game)}
           >
             <img
-              src={game.image}
+              src={game.imageUrl?game.imageUrl:"/wuthering-waves-video-1q1d7.jpg"}
               alt={game.title}
               className="object-cover w-full h-full"
             />

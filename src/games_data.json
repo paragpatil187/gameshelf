@@ -1,0 +1,482 @@
+[
+  {
+    "title": "Cyber Adventure",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "description": "An immersive experience that takes players through the unknown.",
+    "price": 24.25,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000000/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000000/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000000/ss_2.jpg"
+    ],
+    "rating": 3.9,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Great multiplayer experience.",
+        "timestamp": "2025-03-27T10:38:12.228359Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": true
+  },
+  {
+    "title": "Legends of Valor",
+    "genres": [
+      "Fantasy",
+      "Adventure"
+    ],
+    "description": "Battle enemies and conquer the lands in this epic journey.",
+    "price": 29.58,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000001/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000001/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000001/ss_2.jpg"
+    ],
+    "rating": 4.2,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Loved this game!",
+        "timestamp": "2025-04-06T10:38:12.228391Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": true
+  },
+  {
+    "title": "Pixel Racers",
+    "genres": [
+      "Racing",
+      "Indie"
+    ],
+    "description": "Fast-paced racing with vibrant pixel graphics and custom tracks.",
+    "price": 49.88,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000002/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000002/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000002/ss_2.jpg"
+    ],
+    "rating": 3.8,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Addictive gameplay!",
+        "timestamp": "2025-03-24T10:38:12.228404Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": true
+  },
+  {
+    "title": "Mystic Forest",
+    "genres": [
+      "Adventure",
+      "Puzzle"
+    ],
+    "description": "Unravel forest mysteries with clever puzzles and clues.",
+    "price": 48.95,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000003/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000003/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000003/ss_2.jpg"
+    ],
+    "rating": 4.0,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Loved this game!",
+        "timestamp": "2025-04-04T10:38:12.228417Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Drone Strike 2077",
+    "genres": [
+      "Shooter",
+      "Sci-Fi"
+    ],
+    "description": "Engage in aerial drone warfare across futuristic cities.",
+    "price": 24.72,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000004/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000004/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000004/ss_2.jpg"
+    ],
+    "rating": 3.8,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Loved this game!",
+        "timestamp": "2025-03-21T10:38:12.228431Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": true
+  },
+  {
+    "title": "Shadow Realms",
+    "genres": [
+      "Horror",
+      "Mystery"
+    ],
+    "description": "Navigate nightmares in a haunted world full of secrets.",
+    "price": 47.03,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000005/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000005/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000005/ss_2.jpg"
+    ],
+    "rating": 4.2,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Storyline could be better.",
+        "timestamp": "2025-03-21T10:38:12.228443Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": false
+  },
+  {
+    "title": "Galactic Warfare",
+    "genres": [
+      "Strategy",
+      "Sci-Fi"
+    ],
+    "description": "Command fleets and conquer galaxies in strategic combat.",
+    "price": 52.79,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000006/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000006/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000006/ss_2.jpg"
+    ],
+    "rating": 4.9,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Really enjoyed the graphics.",
+        "timestamp": "2025-03-31T10:38:12.228455Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Island Survival",
+    "genres": [
+      "Survival",
+      "Adventure"
+    ],
+    "description": "Gather resources and craft tools to survive on a wild island.",
+    "price": 41.36,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000007/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000007/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000007/ss_2.jpg"
+    ],
+    "rating": 5.0,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Loved this game!",
+        "timestamp": "2025-03-26T10:38:12.228467Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": true
+  },
+  {
+    "title": "Dungeon Delver",
+    "genres": [
+      "RPG",
+      "Dungeon Crawler"
+    ],
+    "description": "Explore deep dungeons filled with traps and treasures.",
+    "price": 42.1,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000008/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000008/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000008/ss_2.jpg"
+    ],
+    "rating": 4.1,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Addictive gameplay!",
+        "timestamp": "2025-03-27T10:38:12.228481Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": false
+  },
+  {
+    "title": "Skyline Drift",
+    "genres": [
+      "Racing",
+      "Arcade"
+    ],
+    "description": "Drift through the city with modified high-speed cars.",
+    "price": 37.86,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000009/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000009/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000009/ss_2.jpg"
+    ],
+    "rating": 4.6,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Really enjoyed the graphics.",
+        "timestamp": "2025-03-21T10:38:12.228490Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Alien Invasion",
+    "genres": [
+      "Shooter",
+      "Alien"
+    ],
+    "description": "Defend Earth from waves of alien attackers.",
+    "price": 34.27,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000010/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000010/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000010/ss_2.jpg"
+    ],
+    "rating": 4.4,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Storyline could be better.",
+        "timestamp": "2025-04-14T10:38:12.228499Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Castle Siege",
+    "genres": [
+      "Strategy",
+      "Castle"
+    ],
+    "description": "Lead your army to siege mighty fortresses.",
+    "price": 38.51,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000011/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000011/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000011/ss_2.jpg"
+    ],
+    "rating": 3.9,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Really enjoyed the graphics.",
+        "timestamp": "2025-04-12T10:38:12.228512Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": true
+  },
+  {
+    "title": "Zombie Outbreak",
+    "genres": [
+      "Action",
+      "Zombie"
+    ],
+    "description": "Escape cities overrun by zombies in this horror survival.",
+    "price": 54.51,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000012/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000012/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000012/ss_2.jpg"
+    ],
+    "rating": 4.2,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Storyline could be better.",
+        "timestamp": "2025-03-23T10:38:12.228523Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Space Tycoon",
+    "genres": [
+      "Simulation",
+      "Sci-Fi"
+    ],
+    "description": "Build your own galactic empire in outer space.",
+    "price": 14.11,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000013/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000013/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000013/ss_2.jpg"
+    ],
+    "rating": 4.0,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Loved this game!",
+        "timestamp": "2025-03-28T10:38:12.228531Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": false
+  },
+  {
+    "title": "Monster Arena",
+    "genres": [
+      "Fighting",
+      "Fantasy"
+    ],
+    "description": "Train your monsters and battle for supremacy.",
+    "price": 56.14,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000014/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000014/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000014/ss_2.jpg"
+    ],
+    "rating": 4.8,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Great multiplayer experience.",
+        "timestamp": "2025-04-09T10:38:12.228539Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Time Traveler",
+    "genres": [
+      "Adventure",
+      "Time Travel"
+    ],
+    "description": "Travel through time solving mysteries of the past and future.",
+    "price": 43.43,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000015/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000015/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000015/ss_2.jpg"
+    ],
+    "rating": 3.8,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Really enjoyed the graphics.",
+        "timestamp": "2025-03-23T10:38:12.228546Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": true
+  },
+  {
+    "title": "Neon Ninja",
+    "genres": [
+      "Action",
+      "Stealth"
+    ],
+    "description": "Slash and sneak through enemies in neon-soaked cities.",
+    "price": 10.91,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000016/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000016/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000016/ss_2.jpg"
+    ],
+    "rating": 4.5,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Loved this game!",
+        "timestamp": "2025-03-29T10:38:12.228555Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": true
+  },
+  {
+    "title": "Lost Horizon",
+    "genres": [
+      "Exploration",
+      "Adventure"
+    ],
+    "description": "Embark on a journey to discover ancient ruins.",
+    "price": 53.53,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000017/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000017/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000017/ss_2.jpg"
+    ],
+    "rating": 4.3,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Great multiplayer experience.",
+        "timestamp": "2025-03-27T10:38:12.228562Z"
+      }
+    ],
+    "isFeatured": true,
+    "isPopular": true
+  },
+  {
+    "title": "Battlezone Zero",
+    "genres": [
+      "FPS",
+      "Multiplayer"
+    ],
+    "description": "Jump into a multiplayer battlefield with intense FPS action.",
+    "price": 55.54,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000018/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000018/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000018/ss_2.jpg"
+    ],
+    "rating": 4.1,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Addictive gameplay!",
+        "timestamp": "2025-03-25T10:38:12.228581Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  },
+  {
+    "title": "Eclipse Protocol",
+    "genres": [
+      "Sci-Fi",
+      "Thriller"
+    ],
+    "description": "Execute secret missions in a world on the brink of collapse.",
+    "price": 50.67,
+    "previewVideo": "https://cdn.cloudflare.steamstatic.com/steam/apps/1000019/movie480.webm",
+    "screenshots": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000019/ss_1.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1000019/ss_2.jpg"
+    ],
+    "rating": 4.7,
+    "comments": [
+      {
+        "userId": "662120f10d1f833d24d81e4a",
+        "text": "Storyline could be better.",
+        "timestamp": "2025-03-23T10:38:12.228590Z"
+      }
+    ],
+    "isFeatured": false,
+    "isPopular": false
+  }
+]
