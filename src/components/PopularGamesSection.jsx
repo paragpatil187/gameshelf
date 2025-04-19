@@ -3,8 +3,10 @@ import GameCard from "./GameCard";
 
 function PopularGamesSection({
   games,
+
   title = "Popular Games",
   isLoading = false,
+  onGameSelect
 }) {
   return (
     <section>
@@ -22,8 +24,8 @@ function PopularGamesSection({
         </div>
       )}
       <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] max-sm:grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
+        {games.map((game,index) => (
+          <GameCard key={index} game={game} onClick={() => onGameSelect(game)} />
         ))}
       </div>
     </section>

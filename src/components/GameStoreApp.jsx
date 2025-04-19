@@ -24,6 +24,7 @@ function GameStoreApp() {
 
   const handleGameSelect = (game) => {
     setSelectedGame(game);
+    console.log("selscted game",game)
     // In a real app, you might want to update the URL here
     window.scrollTo(0, 0);
   };
@@ -42,11 +43,12 @@ function GameStoreApp() {
       ):(
       <main className="px-6 py-8 mx-auto my-0 max-w-[1600px] max-sm:px-4 max-sm:py-6 flex-grow w-full">
       <GameCarousel games={featuredGames} onGameSelect={handleGameSelect} />
-        {!searchQuery && <FeaturedGamesSection games={featuredGames} />}
+        {!searchQuery && <FeaturedGamesSection games={featuredGames} onGameSelect={handleGameSelect} />}
         <PopularGamesSection
           games={gamesToDisplay}
           title={searchQuery ? "Search Results" : "Popular Games"}
           isLoading={isLoading}
+          onGameSelect={handleGameSelect}
         />
       </main>
         )}

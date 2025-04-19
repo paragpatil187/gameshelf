@@ -71,7 +71,7 @@ export default function LoginClient() {
         </h1>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-500 bg-opacity-20 border border-red-500 rounded text-red-500 text-sm">
+          <div className="mb-4 p-3 bg-red-500 bg-opacity-20 border border-red-500 rounded text-blue-500 text-sm">
             {error}
           </div>
         )}
@@ -95,7 +95,7 @@ export default function LoginClient() {
               placeholder="your@email.com"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+              <p className="mt-1 text-sm text-blue-500">{errors.email}</p>
             )}
           </div>
 
@@ -117,7 +117,7 @@ export default function LoginClient() {
               placeholder="••••••••"
             />
             {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+              <p className="mt-1 text-sm text-blue-500">{errors.password}</p>
             )}
           </div>
 

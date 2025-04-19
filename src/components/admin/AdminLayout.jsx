@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import AdminNavbar from "./AdminNavbar";
@@ -11,14 +11,25 @@ export default function AdminLayout({ children }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Check if user is authenticated and is an admin
-  if (status === "unauthenticated") {
-    router.push("/login?callbackUrl=/admin");
-    return null;
+  // 🧠 Handle redirects in useEffect
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login?callbackUrl=/admin");
+    } else if (status === "authenticated" && session?.user?.role !== "admin") {
+      router.push("/");
+    }
+  }, [status, session, router]);
+
+  // ⏳ Wait for session to resolve
+  if (status === "loading") {
+    return <div className="text-center p-12">Loading...</div>;
   }
 
-  if (status === "authenticated" && session?.user?.role !== "admin") {
-    router.push("/");
+  // Prevent rendering layout if user is being redirected
+  if (
+    status === "unauthenticated" ||
+    (status === "authenticated" && session?.user?.role !== "admin")
+  ) {
     return null;
   }
 
@@ -33,7 +44,9 @@ export default function AdminLayout({ children }) {
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         <main
-          className={`flex-1 transition-all duration-300 ${sidebarOpen ? "md:ml-64" : ""}`}
+          className={`flex-1 transition-all duration-300 ${
+            sidebarOpen ? "md:ml-64" : ""
+          }`}
         >
           {children}
         </main>

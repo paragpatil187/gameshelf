@@ -1,10 +1,11 @@
 import React from "react";
 
-function GameCard({ game, isFeatured = false }) {
+function GameCard({ game, isFeatured = false,onClick }) {
   const { id, title, genres, price, imageUrl,screenshot } = game;
 
   return (
     <article
+    onClick={onClick} 
       className={`
         overflow-hidden rounded-lg transition-transform cursor-pointer bg-neutral-800 duration-[0.2s] hover:transform hover:scale-[1.02]
         ${isFeatured ? "flex-[0_0_300px]" : ""}
