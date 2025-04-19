@@ -1,107 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Fallback mock data
-const mockFeaturedGames = [
-  {
-    id: 1,
-    title: "Game Title 1",
-    genres: "Action, Adventure",
-    price: "$59.99",
-    imageUrl:
-      "https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg",
-  },
-  {
-    id: 2,
-    title: "Game Title 2",
-    genres: "Action, Adventure",
-    price: "$59.99",
-    imageUrl:
-      "https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg",
-  },
-  {
-    id: 3,
-    title: "Game Title 3",
-    genres: "Action, Adventure",
-    price: "$59.99",
-    imageUrl:
-      "https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg",
-  },
-  {
-    id: 4,
-    title: "Game Title 4",
-    genres: "Action, Adventure",
-    price: "$59.99",
-    imageUrl:
-      "https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg",
-  },
-];
 
-const mockPopularGames = [
-  {
-    id: 1,
-    title: "Game Title 1",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 2,
-    title: "Game Title 2",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 3,
-    title: "Game Title 3",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 4,
-    title: "Game Title 4",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 5,
-    title: "Game Title 5",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 6,
-    title: "Game Title 6",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 7,
-    title: "Game Title 7",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-  {
-    id: 8,
-    title: "Game Title 8",
-    genres: "RPG, Adventure",
-    price: "$29.99",
-    imageUrl:
-      "https://images.pexels.com/photos/18512919/pexels-photo-18512919.jpeg",
-  },
-];
+
 
 // Fetch games from API and categorize them
 export const fetchGames = createAsyncThunk(
@@ -136,13 +36,15 @@ export const fetchGames = createAsyncThunk(
 // Search games locally (from mock data)
 export const searchGames = createAsyncThunk(
   "games/searchGames",
-  async (query, { rejectWithValue }) => {
+  async (query, {getState, rejectWithValue }) => {
     try {
+      const {games}=getState()
+      const sourceGames = games.popularGames;
       if (!query) {
-        return mockPopularGames;
+        return sourceGames;
       }
 
-      const filteredGames = mockPopularGames.filter((game) =>
+      const filteredGames = sourceGames.filter((game) =>
         game.title.toLowerCase().includes(query.toLowerCase())
       );
 

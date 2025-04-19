@@ -9,40 +9,41 @@ import Link from "next/link";
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [stats, setStats] = useState({
-    totalGames: 0,
-    featuredGames: 0,
-    totalUsers: 0,
-    totalOrders: 0,
-  });
+
+  const [stats, setStats] = useState(null);
+  const [recentGames, setRecentGames] = useState([]);
+  const [recentUsers, setRecentUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Redirect if not admin
     if (status === "authenticated" && session?.user?.role !== "admin") {
       router.push("/");
     }
 
-    // Fetch dashboard stats
-    const fetchStats = async () => {
+    const fetchDashboardData = async () => {
       try {
-        // In a real app, this would be an API call
-        // For now, we'll just use mock data
-        setStats({
-          totalGames: 42,
-          featuredGames: 8,
-          totalUsers: 156,
-          totalOrders: 89,
-        });
+        const [statsRes, gamesRes, usersRes] = await Promise.all([
+          fetch("/api/admin/stats"),
+          fetch("/api/admin/recent-games"),
+          fetch("/api/admin/recent-users"),
+        ]);
+
+        const statsData = await statsRes.json();
+        const gamesData = await gamesRes.json();
+        const usersData = await usersRes.json();
+
+        setStats(statsData);
+        setRecentGames(gamesData);
+        setRecentUsers(usersData);
       } catch (error) {
-        console.error("Failed to fetch stats:", error);
+        console.error("Failed to fetch admin data:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
     if (status === "authenticated" && session?.user?.role === "admin") {
-      fetchStats();
+      fetchDashboardData();
     }
   }, [session, status, router]);
 
@@ -64,31 +65,32 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <DashboardCard
             title="Total Games"
-            value={stats.totalGames}
+            value={stats?.totalGames}
             icon="🎮"
             color="bg-blue-500"
           />
           <DashboardCard
             title="Featured Games"
-            value={stats.featuredGames}
+            value={stats?.featuredGames}
             icon="⭐"
             color="bg-yellow-500"
           />
           <DashboardCard
             title="Total Users"
-            value={stats.totalUsers}
+            value={stats?.totalUsers}
             icon="👤"
             color="bg-green-500"
           />
           <DashboardCard
             title="Total Orders"
-            value={stats.totalOrders}
+            value={stats?.totalOrders}
             icon="🛒"
             color="bg-purple-500"
           />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Recent Games */}
           <div className="bg-zinc-800 p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Recent Games</h2>
@@ -100,24 +102,27 @@ export default function AdminDashboard() {
               </Link>
             </div>
             <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
+              {recentGames.map((game) => (
                 <div
-                  key={i}
+                  key={game._id}
                   className="flex items-center justify-between p-3 bg-zinc-700 rounded"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-zinc-600 rounded"></div>
                     <div>
-                      <p className="font-medium">Game Title {i}</p>
-                      <p className="text-sm text-zinc-400">Added 2 days ago</p>
+                      <p className="font-medium">{game.title}</p>
+                      <p className="text-sm text-zinc-400">
+                        Added {game.createdAtRelative}
+                      </p>
                     </div>
                   </div>
-                  <span className="text-lg font-semibold">$59.99</span>
+                  <span className="text-lg font-semibold">${game.price}</span>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* Recent Users */}
           <div className="bg-zinc-800 p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Recent Users</h2>
@@ -129,24 +134,22 @@ export default function AdminDashboard() {
               </Link>
             </div>
             <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
+              {recentUsers.map((user) => (
                 <div
-                  key={i}
+                  key={user._id}
                   className="flex items-center justify-between p-3 bg-zinc-700 rounded"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-sky-400 rounded-full flex items-center justify-center">
-                      U{i}
+                      {user.name?.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-medium">User {i}</p>
-                      <p className="text-sm text-zinc-400">
-                        user{i}@example.com
-                      </p>
+                      <p className="font-medium">{user.name}</p>
+                      <p className="text-sm text-zinc-400">{user.email}</p>
                     </div>
                   </div>
                   <span className="text-sm bg-zinc-600 px-2 py-1 rounded">
-                    Member
+                    {user.role}
                   </span>
                 </div>
               ))}
