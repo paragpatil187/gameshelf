@@ -1,6 +1,6 @@
 // app/api/games/[gameId]/ratings/route.js
 import { connectToDatabase } from "@/lib/db";
-import Rating from "@/lib/models/Rating";
+import Rating from "@/models/Rating";
 
 export async function GET(req, { params }) {
   await connectToDatabase();

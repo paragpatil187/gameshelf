@@ -1,6 +1,6 @@
 // app/api/games/[gameId]/comments/route.js
 import { connectToDatabase } from "@/lib/db";
-import Comment from "@/lib/models/Comment";
+import Comment from "@/models/Comment";
 
 export async function GET(req, { params }) {
   await connectToDatabase();
