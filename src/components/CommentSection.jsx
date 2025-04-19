@@ -1,34 +1,45 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchComments,
+  addComment,
+} from "../redux/features/Comments/commentSlice";
 
-function CommentSection({ comments = [], onAddComment }) {
+function CommentSection({ gameId }) {
+  const dispatch = useDispatch();
+  const { list: comments, loading, error } = useSelector((state) => state.comments);
+
   const [newComment, setNewComment] = useState("");
   const [userName, setUserName] = useState("");
-  const [error, setError] = useState("");
+  const [localError, setLocalError] = useState("");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    dispatch(fetchComments(gameId));
+  }, [dispatch, gameId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!userName.trim()) {
-      setError("Please enter your name");
+      setLocalError("Please enter your name");
       return;
     }
 
     if (!newComment.trim()) {
-      setError("Please enter a comment");
+      setLocalError("Please enter a comment");
       return;
     }
 
-    const comment = {
-      id: Date.now(),
+    const commentData = {
       user: userName,
       text: newComment,
-      date: new Date().toISOString(),
     };
 
-    onAddComment(comment);
+    await dispatch(addComment({ gameId, commentData }));
+
     setNewComment("");
-    setError("");
+    setLocalError("");
   };
 
   const formatDate = (dateString) => {
@@ -38,7 +49,9 @@ function CommentSection({ comments = [], onAddComment }) {
 
   return (
     <section className="mt-8">
-      <h3 className="text-xl font-bold mb-4">Comments ({comments.length})</h3>
+      <h3 className="text-xl font-bold mb-4">
+        Comments ({comments.length})
+      </h3>
 
       <form
         onSubmit={handleSubmit}
@@ -46,9 +59,9 @@ function CommentSection({ comments = [], onAddComment }) {
       >
         <h4 className="text-lg font-medium mb-4">Add a comment</h4>
 
-        {error && (
+        {localError && (
           <div className="p-3 mb-4 bg-red-900 bg-opacity-30 rounded text-red-400">
-            {error}
+            {localError}
           </div>
         )}
 
@@ -89,9 +102,11 @@ function CommentSection({ comments = [], onAddComment }) {
       </form>
 
       <div className="space-y-4">
-        {comments.length > 0 ? (
+        {loading ? (
+          <p className="text-gray-400 text-center">Loading comments...</p>
+        ) : comments.length > 0 ? (
           comments.map((comment) => (
-            <article key={comment.id} className="p-4 bg-neutral-800 rounded-lg">
+            <article key={comment._id} className="p-4 bg-neutral-800 rounded-lg">
               <div className="flex justify-between items-start mb-2">
                 <h4 className="font-bold">{comment.user}</h4>
                 <time className="text-sm text-gray-400">

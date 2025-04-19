@@ -34,7 +34,7 @@ function GameCarousel({ games, onGameSelect }) {
       <div className="relative w-full h-full overflow-hidden rounded-xl">
         {games.map((game, index) => (
           <div
-            key={game.id}
+            key={index}
             className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
               index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
