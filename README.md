@@ -1,8 +1,8 @@
-# 🎮 GameHub – Full Stack Gaming Marketplace
+# 🎮 GameShelf – Full Stack Gaming Marketplace
 
 A full-featured gaming platform built with **Next.js 14**, **MongoDB** (via **Mongoose**), and **TailwindCSS**, where users can explore games, view detailed pages, add comments, and admins can manage all content from a secure dashboard.
 
-Deployed at: [https://your-deployed-site.vercel.app](https://your-deployed-site.vercel.app)
+Deployed at: [https://gameshelf-omega.vercel.app/](https://gameshelf-omega.vercel.app/)
 
 ---
 

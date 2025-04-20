@@ -25,7 +25,7 @@ function Navbar({ searchQuery, onSearch }) {
             className="h-10 w-10 object-cover rounded-md"
           />
           <span className="text-white text-lg font-semibold hidden sm:inline">
-            GameStore
+            GameShelf
           </span>
         </div>
 

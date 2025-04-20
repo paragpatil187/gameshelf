@@ -37,7 +37,7 @@ export default function AdminNavbar({ onMenuClick, user }) {
           </button>
 
           <Link href="/admin" className="text-xl font-bold">
-            Game Store Admin
+            GameShelf Admin
           </Link>
         </div>
 

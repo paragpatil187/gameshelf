@@ -216,7 +216,7 @@ function Footer() {
             <span className="text-lg font-bold">Game Store</span>
           </div>
           <div className="text-sm text-white text-opacity-60">
-            © {currentYear} Game Store. All rights reserved.
+            © {currentYear} GameShelf . All rights reserved.
           </div>
         </div>
       </div>
