@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Game from "@/models/Game";
 import mongoose from "mongoose";
+import Game from "@/models/Game";
 import { connectToDatabase } from "@/lib/db";
 
-// GET /api/admin/games/[id] - Get a specific game
+// GET /api/admin/games/[id]
 export async function GET(request, { params }) {
   try {
     const session = await getServerSession(authOptions);
@@ -17,24 +17,23 @@ export async function GET(request, { params }) {
     await connectToDatabase();
 
     const { id } = params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid game ID" }, { status: 400 });
+    }
 
     const game = await Game.findById(id);
-
     if (!game) {
       return NextResponse.json({ message: "Game not found" }, { status: 404 });
     }
 
     return NextResponse.json(game);
   } catch (error) {
-    console.error("Error fetching game:", error);
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("GET game error:", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }
 
-// PUT /api/admin/games/[id] - Update a game
+// PUT /api/admin/games/[id]
 export async function PUT(request, { params }) {
   try {
     const session = await getServerSession(authOptions);
@@ -46,19 +45,43 @@ export async function PUT(request, { params }) {
     await connectToDatabase();
 
     const { id } = params;
-    const gameData = await request.json();
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid game ID" }, { status: 400 });
+    }
 
-    if (!gameData.title || !gameData.image) {
-      return NextResponse.json(
-        { message: "Missing required fields" },
-        { status: 400 }
-      );
+    const {
+      title,
+      genres,
+      price,
+      imageUrl,
+      previewVideo,
+      description,
+      rating,
+      isFeatured,
+      isPopular,
+      screenshots
+    } = await request.json();
+
+    // Basic validation
+    if (!title || price == null) {
+      return NextResponse.json({ message: "Missing required fields: title or price" }, { status: 400 });
     }
 
     const updatedGame = await Game.findByIdAndUpdate(
       id,
-      { ...gameData, updatedAt: new Date() },
-      { new: true }
+      {
+        title,
+        genres,
+        price,
+        imageUrl,
+        previewVideo,
+        description,
+        rating,
+        isFeatured,
+        isPopular,
+        screenshots
+      },
+      { new: true, runValidators: true }
     );
 
     if (!updatedGame) {
@@ -67,15 +90,12 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json(updatedGame);
   } catch (error) {
-    console.error("Error updating game:", error);
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("PUT game error:", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }
 
-// DELETE /api/admin/games/[id] - Delete a game
+// DELETE /api/admin/games/[id]
 export async function DELETE(request, { params }) {
   try {
     const session = await getServerSession(authOptions);
@@ -87,6 +107,9 @@ export async function DELETE(request, { params }) {
     await connectToDatabase();
 
     const { id } = params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid game ID" }, { status: 400 });
+    }
 
     const deletedGame = await Game.findByIdAndDelete(id);
 
@@ -94,15 +117,9 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ message: "Game not found" }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { message: "Game deleted successfully" },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: "Game deleted successfully" });
   } catch (error) {
-    console.error("Error deleting game:", error);
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("DELETE game error:", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

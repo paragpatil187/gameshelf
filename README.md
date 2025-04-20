@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎮 GameHub – Full Stack Gaming Marketplace
 
-## Getting Started
+A full-featured gaming platform built with **Next.js 14**, **MongoDB** (via **Mongoose**), and **TailwindCSS**, where users can explore games, view detailed pages, add comments, and admins can manage all content from a secure dashboard.
 
-First, run the development server:
+Deployed at: [https://your-deployed-site.vercel.app](https://your-deployed-site.vercel.app)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js >= 18
+- MongoDB Atlas URI
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone https://github.com/paragpatil187/gameshelf.git
+cd gamehub
+npm install
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+✅ Features Completed
+🧩 User Experience
+🎮 Landing Page with Game Banner
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🔍 Browse Games with title, genres, screenshots, preview videos
 
-## Learn More
+📄 Individual Game Detail Page
 
-To learn more about Next.js, take a look at the following resources:
+Description, rating, screenshots, preview video
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+💬 Comment Section (User-based, timestamped)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔐 User Authentication
 
-## Deploy on Vercel
+Email/Password Signup & Login
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🌐 Google OAuth integration via NextAuth
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+🛠 Admin Panel
+🧑‍💼 Admin Dashboard UI (/admin)
+
+➕ Add Game
+
+✏️ Edit Game
+
+❌ Delete Game
+
+✅ Manage isFeatured and isPopular flags
+
+🔐 Secured admin routes with session-based role checks
+
+Technology | Purpose
+Next.js 14 | Full stack framework
+Mongoose | MongoDB ODM
+Tailwind CSS | Utility-first styling
+NextAuth.js | Authentication
+MongoDB Atlas | Cloud database
+Vercel | Deployment
+
+🌱 Future Scope
+🔧 Functional Improvements
+☁️ Cloudinary integration for image/screenshot/video uploads
+
+🛒 Add to Cart & Wishlist
+
+💳 Payment Gateway (Razorpay or Stripe)
+
+🔗 Related Games / Genre Suggestions
+
+📹 Preview Video Upload via admin panel
+
+🧾 Game Reviews and Ratings by users
+
+👤 User Profile Pages
+
+🧵 Categories Filtering + Sorting
+
+📄 Pages To Be Added
+🗂 Games by Genre
+
+🏷 Tag-based Game Filtering
+
+📜 Terms & Privacy Pages
+
+👤 User Dashboard

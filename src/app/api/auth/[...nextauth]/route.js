@@ -16,7 +16,7 @@ if (!process.env.NEXTAUTH_SECRET) {
 }
 
 export const authOptions = {
-  adapter: MongoDBAdapter(clientPromise), // keep this if you use MongoDBAdapter for Google login
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -52,6 +52,7 @@ export const authOptions = {
           name: user.name,
           email: user.email,
           image: user.image,
+          role: user.role, // ✅ include role in returned user object
         };
       },
     }),
@@ -65,6 +66,7 @@ export const authOptions = {
       if (account && user) {
         token.userId = user.id;
         token.provider = account.provider;
+        token.role = user.role; // ✅ attach role to token
       }
       return token;
     },
@@ -72,6 +74,7 @@ export const authOptions = {
       if (token) {
         session.user.id = token.userId;
         session.user.provider = token.provider;
+        session.user.role = token.role; // ✅ add role to session object
       }
       return session;
     },

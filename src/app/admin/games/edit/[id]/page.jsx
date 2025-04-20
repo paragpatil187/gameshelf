@@ -1,104 +1,159 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter, useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import AdminLayout from "@/components/admin/AdminLayout";
-import GameForm from "@/components/admin/GameForm";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import AdminLayout from '@/components/admin/AdminLayout';
 
-export default function EditGame() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const params = useParams();
-  const { id } = params;
-
+export default function EditGame({ params }) {
   const [game, setGame] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  const [form, setForm] = useState({
+    title: '',
+    genres: '',
+    price: '',
+    imageUrl: '',
+    previewVideo: '',
+    description: '',
+    rating: '',
+    isFeatured: false,
+    isPopular: false,
+    screenshots: '',
+  });
 
   useEffect(() => {
-    // Redirect if not admin
-    if (status === "authenticated" && session?.user?.role !== "admin") {
-      router.push("/");
-    }
-
-    // Fetch game data
-    const fetchGame = async () => {
+    async function fetchGame() {
       try {
-        // In a real app, this would be an API call
-        // For now, we'll just use mock data
-        const mockGame = {
-          id: parseInt(id),
-          title: `Game Title ${id}`,
-          description:
-            "This is a detailed description of the game. It includes information about gameplay, story, and features.",
-          price: 59.99,
-          discountPrice: 49.99,
-          genres: ["Action", "Adventure"],
-          releaseDate: "2023-01-15",
-          developer: "Game Studio",
-          publisher: "Game Publisher",
-          featured: true,
-          imageUrl:
-            "https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg",
-        };
+        const res = await fetch(`/api/admin/games/${params.id}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Failed to fetch game');
 
-        setGame(mockGame);
-      } catch (error) {
-        console.error("Failed to fetch game:", error);
-        alert("Failed to load game data");
-      } finally {
-        setIsLoading(false);
+        setGame(data);
+        setForm({
+          title: data.title || '',
+          genres: (data.genres || []).join(', '),
+          price: data.price || '',
+          imageUrl: data.imageUrl || '',
+          previewVideo: data.previewVideo || '',
+          description: data.description || '',
+          rating: data.rating || '',
+          isFeatured: data.isFeatured || false,
+          isPopular: data.isPopular || false,
+          screenshots: (data.screenshots || []).join(', '),
+        });
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
       }
-    };
-
-    if (status === "authenticated" && session?.user?.role === "admin") {
-      fetchGame();
     }
-  }, [id, session, status, router]);
 
-  const handleSubmit = async (gameData) => {
-    setIsSaving(true);
+    fetchGame();
+  }, [params.id]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      // In a real app, this would be an API call
-      console.log("Updating game:", { id, ...gameData });
+      const payload = {
+        ...form,
+        price: parseFloat(form.price),
+        rating: parseFloat(form.rating),
+        genres: form.genres.split(',').map((g) => g.trim()),
+        screenshots: form.screenshots.split(',').map((s) => s.trim()),
+      };
 
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const res = await fetch(`/api/admin/games/${params.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
-      // Redirect to games list
-      router.push("/admin/games");
-      alert("Game updated successfully!");
-    } catch (error) {
-      console.error("Failed to update game:", error);
-      alert("Failed to update game. Please try again.");
-    } finally {
-      setIsSaving(false);
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Failed to update game');
+      }
+
+      router.push('/admin/games');
+    } catch (err) {
+      alert(err.message);
     }
   };
 
-  if (status === "loading" || isLoading) {
-    return (
-      <AdminLayout>
-        <div className="flex justify-center items-center h-[calc(100vh-72px)]">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-400"></div>
-        </div>
-      </AdminLayout>
-    );
-  }
+  if (loading) return <p className="p-4">Loading...</p>;
+  if (!game) return <p className="p-4 text-red-500">Game not found</p>;
 
   return (
     <AdminLayout>
-      <div className="p-6">
+      <div className="max-w-5xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6">Edit Game</h1>
-        {game && (
-          <GameForm
-            initialData={game}
-            onSubmit={handleSubmit}
-            isLoading={isSaving}
-            isEdit={true}
-          />
-        )}
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block mb-1">Title</label>
+            <input name="title" value={form.title} onChange={handleChange} className="w-full border rounded p-2" required />
+          </div>
+
+          <div>
+            <label className="block mb-1">Genres (comma separated)</label>
+            <input name="genres" value={form.genres} onChange={handleChange} className="w-full border rounded p-2" />
+          </div>
+
+          <div>
+            <label className="block mb-1">Price</label>
+            <input type="number" name="price" value={form.price} onChange={handleChange} className="w-full border rounded p-2" required />
+          </div>
+
+          <div>
+            <label className="block mb-1">Rating</label>
+            <input type="number" step="0.1" name="rating" value={form.rating} onChange={handleChange} className="w-full border rounded p-2" />
+          </div>
+
+          <div>
+            <label className="block mb-1">Image URL</label>
+            <input name="imageUrl" value={form.imageUrl} onChange={handleChange} className="w-full border rounded p-2" />
+          </div>
+
+          <div>
+            <label className="block mb-1">Preview Video URL</label>
+            <input name="previewVideo" value={form.previewVideo} onChange={handleChange} className="w-full border rounded p-2" />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block mb-1">Screenshots (comma separated URLs)</label>
+            <input name="screenshots" value={form.screenshots} onChange={handleChange} className="w-full border rounded p-2" />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block mb-1">Description</label>
+            <textarea name="description" value={form.description} onChange={handleChange} className="w-full border rounded p-2" rows="4" />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input type="checkbox" name="isFeatured" checked={form.isFeatured} onChange={handleChange} />
+            <label>Featured</label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input type="checkbox" name="isPopular" checked={form.isPopular} onChange={handleChange} />
+            <label>Popular</label>
+          </div>
+
+          <div className="md:col-span-2">
+            <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+              Update Game
+            </button>
+          </div>
+        </form>
       </div>
     </AdminLayout>
   );

@@ -21,22 +21,17 @@ export default function AdminGames() {
       router.push("/");
     }
 
-    // Fetch games
+    // Fetch games from API
     const fetchGames = async () => {
       try {
-        // In a real app, this would be an API call
-        // For now, we'll just use mock data
-        const mockGames = Array.from({ length: 20 }, (_, i) => ({
-          id: i + 1,
-          title: `Game Title ${i + 1}`,
-          price: i % 2 === 0 ? "$59.99" : "$29.99",
-          genre: i % 3 === 0 ? "Action, Adventure" : "RPG, Strategy",
-          featured: i % 5 === 0,
-          createdAt: new Date(Date.now() - i * 86400000).toISOString(),
-        }));
+        if (status === "authenticated" && session?.user?.role === "admin") {
+          const res = await fetch("/api/admin/games");
+          const data = await res.json();
 
-        setGames(mockGames);
-        setTotalPages(Math.ceil(mockGames.length / 10));
+          // Set games directly from the response, assuming it's an array
+          setGames(data); // No need to access data.games
+          setTotalPages(Math.ceil(data.length / 10)); // Adjust pagination based on the total games
+        }
       } catch (error) {
         console.error("Failed to fetch games:", error);
       } finally {
@@ -63,12 +58,12 @@ export default function AdminGames() {
   };
 
   const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    game.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const paginatedGames = filteredGames.slice(
     (currentPage - 1) * 10,
-    currentPage * 10,
+    currentPage * 10
   );
 
   if (status === "loading" || isLoading) {
@@ -131,26 +126,18 @@ export default function AdminGames() {
               </thead>
               <tbody className="divide-y divide-zinc-700">
                 {paginatedGames.map((game) => (
-                  <tr key={game.id} className="hover:bg-zinc-700">
+                  <tr key={game._id} className="hover:bg-zinc-700">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="h-10 w-10 bg-zinc-600 rounded"></div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium">
-                            {game.title}
-                          </div>
-                          <div className="text-sm text-zinc-400">
-                            ID: {game.id}
-                          </div>
+                          <div className="text-sm font-medium">{game.title}</div>
+                          <div className="text-sm text-zinc-400">ID: {game._id}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {game.price}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {game.genre}
-                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">{game.price}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">{game.genre}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       {game.featured ? (
                         <span className="px-2 py-1 bg-yellow-500 bg-opacity-20 text-yellow-400 rounded-full">
@@ -168,13 +155,13 @@ export default function AdminGames() {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2">
                         <Link
-                          href={`/admin/games/edit/${game.id}`}
+                          href={`/admin/games/edit/${game._id}`}
                           className="text-sky-400 hover:text-sky-300"
                         >
                           Edit
                         </Link>
                         <button
-                          onClick={() => handleDeleteGame(game.id)}
+                          onClick={() => handleDeleteGame(game._id)}
                           className="text-red-400 hover:text-red-300"
                         >
                           Delete

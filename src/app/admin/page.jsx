@@ -8,6 +8,7 @@ import Link from "next/link";
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
+  console.log(session,status,"sessiondata")
   const router = useRouter();
 
   const [stats, setStats] = useState(null);
@@ -60,38 +61,38 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
+        {/* <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <DashboardCard
+          {/* <DashboardCard
             title="Total Games"
             value={stats?.totalGames}
             icon="🎮"
             color="bg-blue-500"
-          />
-          <DashboardCard
+          /> */}
+          {/* <DashboardCard
             title="Featured Games"
             value={stats?.featuredGames}
             icon="⭐"
             color="bg-yellow-500"
-          />
-          <DashboardCard
+          /> */}
+          {/* <DashboardCard
             title="Total Users"
             value={stats?.totalUsers}
             icon="👤"
             color="bg-green-500"
-          />
-          <DashboardCard
+          /> */}
+          {/* <DashboardCard
             title="Total Orders"
             value={stats?.totalOrders}
             icon="🛒"
             color="bg-purple-500"
-          />
+          /> */}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent Games */}
-          <div className="bg-zinc-800 p-6 rounded-lg">
+          {/* <div className="bg-zinc-800 p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Recent Games</h2>
               <Link
@@ -120,10 +121,10 @@ export default function AdminDashboard() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Recent Users */}
-          <div className="bg-zinc-800 p-6 rounded-lg">
+          {/* <div className="bg-zinc-800 p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Recent Users</h2>
               <Link
@@ -154,7 +155,7 @@ export default function AdminDashboard() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </AdminLayout>
